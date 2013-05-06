@@ -28,7 +28,7 @@ Leiningen command:
 lein benchmark base64-clj-benchmark.<ID> [--quick]
 ```
 
-__<ID>__ is one of:
+__ID__ is one of:
 
 - `base64-clj` : evaluate this project
 - `base64-naive` : evaluate a naive and intuitive implementation
