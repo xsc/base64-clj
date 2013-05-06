@@ -26,34 +26,36 @@
 
 ;; ## Length Calculation
 
-(defn encode-result-size
+(defmacro encode-result-size
   "Given the length of an UTF-8 byte array, compute the size of the Base64 result array."
   [n]
-  (int (* (/ (- (+ n 2) (mod (+ n 2) 3)) 3) 4)))
+  `(int (* (/ (- (+ ~n 2) (mod (+ ~n 2) 3)) 3) 4)))
 
-(defn decode-result-size
+(defmacro decode-result-size
   "Given the length of a Base64-encoded UTF-8 byte array, compute the maximum size of the 
    decoding result array."
   [n]
-  (int (/ (* n 6) 8)))
+  `(int (/ (* ~n 6) 8)))
 
 ;; ## Data Access
 
-(defn ->int
+(defmacro ->int
   "Convert byte value to integer, adjusting values in [-128;127] to [0;255]."
   [b]
-  (int
-    (if (< (byte b) ZERO)
-      (unchecked-add-int (byte b) (int 256))
-      b)))
+  `(let [b# (byte ~b)]
+     (int
+       (if (< b# ZERO)
+         (unchecked-add-int b# (int 256))
+         b#))))
 
-(defn ->byte
+(defmacro ->byte
   "Convert integer value to byte, adjusting values in [0;255] to [-128;127]."
   [b]
-  (byte
-    (if (> (int b) (int 127))
-      (unchecked-subtract-int (int b) (int 256))
-      b)))
+  `(let [b# (int ~b)]
+     (byte
+       (if (> b# (int 127))
+         (unchecked-subtract-int b# (int 256))
+         b#))))
 
 (defmacro get-byte-at
   "Get the byte value of the character at the given index in the given string."
