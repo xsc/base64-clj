@@ -11,7 +11,7 @@
   "Base64 Alphabet."
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
 
-(def BASE64_PAD (byte \=))
+(def ^:const BASE64_PAD (byte \=))
 
 ;; ## Decode Alphabet
 ;;
@@ -19,7 +19,7 @@
 ;; Base64 characters to their 6-bit representation, the padding value 64 or the invalid 
 ;; value 65.
 
-(defn ^:private generate-decode-table
+(defmacro ^:private generate-decode-table
   "This macro creates the decode table at compile time."
   []
   (->> (concat
@@ -34,19 +34,18 @@
     (map char)
     (apply str)))
 
-(def BASE64_DECODE
+(def ^:const BASE64_DECODE
   "Base64 Decode Alphabet."
   (generate-decode-table))
 
 ;; ## Conversion
 
 (defmacro int->base64-byte
-  "Convert 6-bit integer (or the padding value 64) to Base64 byte."
+  "Convert 6-bit integer to Base64 byte."
   [i] 
   `(byte (.charAt BASE64_DEFAULT (int ~i))))
 
 (defmacro base64-byte->int
-  "Convert Base64 character to 6-bit integer, the padding value 64 or the no-such-value
-   indicator 65."
+  "Convert Base64 character to 6-bit integer."
   [c]
   `(int (.charAt BASE64_DECODE (int ~c))))

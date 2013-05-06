@@ -19,7 +19,7 @@ __REPL__
 
 ```
 
-### Benchmarks
+## Benchmarks
 
 You can run [Criterium](https://github.com/hugoduncan/criterium) benchmarks on different Base64 codecs with the following
 Leiningen command:
