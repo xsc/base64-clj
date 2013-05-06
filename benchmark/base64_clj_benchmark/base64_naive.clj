@@ -1,6 +1,7 @@
 (ns ^{ :doc "Base64 Encoding/Decoding in Clojure"
        :author "Yannick Scherer" }
-  base64)
+  base64-clj-benchmark.base64-naive
+  (:use base64-clj-benchmark.data))
 
 ;; ## Conversion Functions
 
@@ -78,12 +79,6 @@
     (apply str (map char octets))))
 
 
-(comment
-  (def s0 
-    (str "Man is distinguished, not only by his reason, but by this singular passion from other "
-         "animals, which is a lust of the mind, that by a perseverance of delight in the continued "
-         "and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure."))
-  (def b (base64-encode s0))
-  (def s1 (base64-decode b))
-  (println (= s0 s1))
-)
+;; ## Benchmark
+
+(defbench -main base64-encode base64-decode)

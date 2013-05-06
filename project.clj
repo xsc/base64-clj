@@ -6,5 +6,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]]
   :profiles {:dev {:dependencies [[midje "1.5-alpha9"]]
                    :plugins [[lein-midje "3.0-alpha4"]]}
-             :benchmark {:dependencies [[criterium "0.4.1"]]
-                         :source-paths ["benchmark"]}})
+             :benchmark {:dependencies [[criterium "0.4.1"]
+                                        [commons-codec "1.7"]]
+                         :source-paths ["benchmark"]}}
+  :aliases { "benchmark" ["with-profile" "dev,benchmark" "run" "-m"] })
