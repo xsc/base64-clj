@@ -66,7 +66,7 @@
   [i n]
   `(byte 
      (bit-and
-       (bit-shift-right (int ~i) ~(* (- 3 n) 6))
+       (bit-shift-right (int ~i) (int ~(* (- 3 n) 6)))
        SEXTET_MASK)))
 
 (defmacro get-octet
@@ -75,5 +75,5 @@
   [i n]
   `(->byte 
      (bit-and
-       (bit-shift-right (int ~i) ~(* (- 2 n) 8))
+       (bit-shift-right (int ~i) (int ~(* (- 2 n) 8)))
        OCTET_MASK)))

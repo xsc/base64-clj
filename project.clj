@@ -8,5 +8,7 @@
                    :plugins [[lein-midje "3.0-alpha4"]]}
              :benchmark {:dependencies [[criterium "0.4.1"]
                                         [commons-codec "1.7"]]
-                         :source-paths ["benchmark"]}}
+                         :warn-on-reflection true
+                         :source-paths ["benchmark"]
+                         :jvm-opts ["-Xmx1g" "-server"]}}
   :aliases { "benchmark" ["with-profile" "dev,benchmark" "run" "-m"] })

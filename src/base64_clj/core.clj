@@ -42,7 +42,7 @@
   ^"[B"
   [^"[B" data]
   (let [len (int (count data))
-        cap (encode-result-size len)
+        cap (int (encode-result-size len))
         b (ByteBuffer/allocate cap)]
     (loop [i (int 0)]
       (if (< i len)
@@ -105,7 +105,7 @@
                 (cond (= y BASE64_PAD) (- s 2)
                       (= x BASE64_PAD) (- s 1)
                       :else s))
-          b (ByteBuffer/allocate cap)]
+          b (ByteBuffer/allocate (int cap))]
       (loop [i (int 0)]
         (if (< i len)
           (let [next-i (unchecked-add-int i FOUR)]
