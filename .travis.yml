@@ -5,6 +5,7 @@ after_success:
   - lein2 benchmark base64-clj-benchmark.base64-clj --quick
   - lein2 benchmark base64-clj-benchmark.base64-naive --quick
   - lein2 benchmark base64-clj-benchmark.apache-commons-base64 --quick
+  - lein2 benchmark base64-clj-benchmark.clojure-data-codec --quick
 jdk:
   - openjdk7
   - openjdk6

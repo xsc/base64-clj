@@ -41,7 +41,7 @@
   [b]
   `(let [b# (byte ~b)]
      (int
-       (if (zero? b#)
+       (if (< b# (int 0))
          (unchecked-add-int b# (int 256))
          b#))))
 
