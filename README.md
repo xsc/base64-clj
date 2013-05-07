@@ -40,6 +40,14 @@ __REPL__
 ;; => "ÄÖÜ"
 ```
 
+## Tests
+
+You can run [Midje](https://github.com/marick/Midje) tests using the following Leiningen command:
+
+```
+lein midje
+```
+
 ## Benchmarks
 
 You can run [Criterium](https://github.com/hugoduncan/criterium) benchmarks on different Base64 codecs with the following
