@@ -1,4 +1,4 @@
-(defproject base64-clj "0.1.0-SNAPSHOT"
+(defproject base64-clj "0.1.0"
   :description "Fast Base64 Encoding/Decoding in Clojure"
   :url "https://github.com/xsc/base64-clj"
   :license {:name "Eclipse Public License"
