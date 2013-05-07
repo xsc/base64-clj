@@ -2,13 +2,10 @@
        :author "Yannick Scherer" }
   base64-clj.utils)
 
+(set! *unchecked-math* true)
+
 ;; ## Constants
 
-(def ^:const ZERO (int 0))
-(def ^:const ONE (int 1))
-(def ^:const TWO (int 2))
-(def ^:const THREE (int 3))
-(def ^:const FOUR (int 4))
 (def ^:const SEXTET_MASK (int 0x3F))
 (def ^:const OCTET_MASK (int 0xFF))
 
@@ -44,7 +41,7 @@
   [b]
   `(let [b# (byte ~b)]
      (int
-       (if (< b# ZERO)
+       (if (zero? b#)
          (unchecked-add-int b# (int 256))
          b#))))
 

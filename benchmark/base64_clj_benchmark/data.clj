@@ -4,8 +4,9 @@
 ;; ## Data
 
 (defn random-data
+  ^"[B"
   [n]
-  (apply str (take n (map char (repeatedly #(rand-int 256))))))
+  (byte-array (take n (map byte (repeatedly #(- (rand-int 256) 128))))))
 
 ;; ## Macro for Main Function
 

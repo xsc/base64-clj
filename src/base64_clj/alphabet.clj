@@ -7,7 +7,7 @@
 ;; An Alphabet is a 65 character string with the first 64 characters describing
 ;; the characters used for encoding 6-bit values.
 
-(def ^:const BASE64_DEFAULT 
+(def ^:const ^String BASE64_DEFAULT 
   "Base64 Alphabet."
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
 
@@ -34,7 +34,7 @@
     (map char)
     (apply str)))
 
-(def ^:const BASE64_DECODE
+(def ^:const ^String BASE64_DECODE
   "Base64 Decode Alphabet."
   (generate-decode-table))
 

@@ -4,4 +4,4 @@
   (:use base64-clj.core
         base64-clj-benchmark.data))
 
-(defbench -main encode decode)
+(defbench -main encode-bytes decode-bytes)

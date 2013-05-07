@@ -5,6 +5,9 @@
         base64-clj.utils)
   (:import java.nio.ByteBuffer))
 
+(set! *unchecked-math* true)
+(set! *warn-on-reflection* true)
+
 ;; ## Encoding
 ;;
 ;; ### Write Helpers
@@ -19,8 +22,8 @@
     `(let [~v (int 
                 (bit-or
                   (<< (->int ~o0) 16) 
-                  ~(if o1 `(<< (->int ~o1) 8) `ZERO)
-                  ~(if o2 `(->int ~o2) `ZERO)))]
+                  ~(if o1 `(<< (->int ~o1) 8) 0)
+                  ~(if o2 `(->int ~o2) 0)))]
        (doto ~b
          (.put (int->base64-byte (get-sextet ~v 0)))
          (.put (int->base64-byte (get-sextet ~v 1)))
@@ -47,8 +50,8 @@
         b (ByteBuffer/allocate cap)]
     (loop [i (int 0)]
       (if (< i len)
-        (let [next-i (unchecked-add-int i THREE)
-              n (if (<= next-i len) THREE (unchecked-remainder-int (unchecked-subtract-int len i) THREE))]
+        (let [next-i (+ i (int 3))
+              n (if (<= next-i len) (int 3) (unchecked-remainder-int (unchecked-subtract-int len i) (int 3)))]
           (write-octets b data i n)
           (recur next-i))
         (.array b)))))
@@ -68,7 +71,7 @@
   "Read the given four sextets into the given ByteBuffer by converting them
    to three octets first."
   [b s0 s1 s2 s3]
-  `(let [v# (int (bit-or (<< ~s0 18) (<< ~s1 12) (<< (or ~s2 0) 6) (or ~s3 0)))]
+  `(let [v# (int (bit-or (<< ~s0 18) (<< ~s1 12) (<< (or ~s2 0) 6) (or ~s3 (int 0))))]
      (.put ~b (get-octet v# 0))
      (when ~s2 
        (.put ~b (get-octet v# 1))
@@ -98,18 +101,18 @@
   ^"[B"
   [^"[B" data]
   (let [len (int (count data))]
-    (when-not (zero? (unchecked-remainder-int len FOUR))
+    (when-not (zero? (unchecked-remainder-int len(int 4)))
       (throw (IllegalArgumentException. "Expects a byte array whose length is dividable by 4.")))
     (let [cap (let [x (aget data (unchecked-dec-int len))
-                    y (aget data (unchecked-subtract-int len 2))
+                    y (aget data (unchecked-subtract-int len (int 2)))
                     s (decode-result-size len)]
-                (cond (== y BASE64_PAD) (- s 2)
-                      (== x BASE64_PAD) (- s 1)
+                (cond (== y BASE64_PAD) (unchecked-subtract-int s (int 2))
+                      (== x BASE64_PAD) (unchecked-subtract-int s (int 1))
                       :else s))
           b (ByteBuffer/allocate (int cap))]
       (loop [i (int 0)]
         (if (< i len)
-          (let [next-i (unchecked-add-int i FOUR)]
+          (let [next-i (unchecked-add-int i (int 4))]
             (when (<= next-i len)
               (read-sextets b data i))
             (recur next-i))

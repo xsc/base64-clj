@@ -7,6 +7,7 @@
   :profiles {:dev {:dependencies [[midje "1.5.1"]]
                    :plugins [[lein-midje "3.0.1"]]}
              :benchmark {:dependencies [[criterium "0.4.1"]
+                                        [org.clojure/data.codec "0.1.0"]
                                         [commons-codec "1.7"]]
                          :warn-on-reflection true
                          :source-paths ["benchmark"]
