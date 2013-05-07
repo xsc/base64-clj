@@ -24,7 +24,6 @@ __REPL__
 
 (base64/decode "SGVsbG8sIFdvcmxkIQ==")
 ;; => "Hello, World!"
-
 ```
 
 ## Benchmarks
