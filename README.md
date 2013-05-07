@@ -21,9 +21,23 @@ __REPL__
 
 (base64/encode "Hello, World!")
 ;; => "SGVsbG8sIFdvcmxkIQ=="
-
 (base64/decode "SGVsbG8sIFdvcmxkIQ==")
 ;; => "Hello, World!"
+
+(base64/encode-bytes (.getBytes "Hello, World!"))
+;; => #<byte[] [B@28a34522>
+(base64/decode-bytes (.getBytes "SGVsbG8sIFdvcmxkIQ=="))
+;; => #<byte[] [B@18b0af83>
+
+(base64/encode "ÄÖÜ" "ISO-8859-1")
+;; => "xNbc"
+(base64/encode "ÄÖÜ" "UTF-8")
+;; => "w4TDlsOc"
+
+(base64/decode "xNbc")
+;; => "???"
+(base64/decode "xNbc" "ISO-8859-1")
+;; => "ÄÖÜ"
 ```
 
 ## Benchmarks
