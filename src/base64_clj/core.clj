@@ -31,7 +31,7 @@
   "Write `n` octets of the given byte array to the given ByteBuffer, converting
    them to four Base64-encoded sextets (possibly padding bytes) first."
   [buffer data idx n]
-  `(condp = ~n
+  `(condp == ~n
       1 (write-base64 ~buffer (get-byte-at ~data ~idx 0) nil nil)
       2 (write-base64 ~buffer (get-byte-at ~data ~idx 0) (get-byte-at ~data ~idx 1) nil)
       3 (write-base64 ~buffer (get-byte-at ~data ~idx 0) (get-byte-at ~data ~idx 1) (get-byte-at ~data ~idx 2))))
@@ -86,9 +86,9 @@
     (read-base64 ~buffer
       (base64-byte->int s0#)
       (base64-byte->int s1#)
-      (when-not (= s2# BASE64_PAD)
+      (when-not (== s2# BASE64_PAD)
         (base64-byte->int s2#))
-      (when-not (or (= s2# BASE64_PAD) (= s3# BASE64_PAD))
+      (when-not (or (== s2# BASE64_PAD) (== s3# BASE64_PAD))
         (base64-byte->int s3#)))))
 
 ;; ### Decoder
@@ -103,8 +103,8 @@
     (let [cap (let [x (aget data (unchecked-dec-int len))
                     y (aget data (unchecked-subtract-int len 2))
                     s (decode-result-size len)]
-                (cond (= y BASE64_PAD) (- s 2)
-                      (= x BASE64_PAD) (- s 1)
+                (cond (== y BASE64_PAD) (- s 2)
+                      (== x BASE64_PAD) (- s 1)
                       :else s))
           b (ByteBuffer/allocate (int cap))]
       (loop [i (int 0)]

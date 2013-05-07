@@ -60,7 +60,7 @@
 (defmacro get-byte-at
   "Get the byte value of the character at the given index in the given string."
   [s idx offset]
-  `(byte (aget ~s (unchecked-add (int ~idx) (int ~offset)))))
+  `(byte (aget ~s (unchecked-add-int (int ~idx) (int ~offset)))))
 
 (defmacro get-sextet
   "Given a 24-bit value, get the sextet at the given index. `n` has to be

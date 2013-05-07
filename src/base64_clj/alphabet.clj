@@ -7,7 +7,7 @@
 ;; An Alphabet is a 65 character string with the first 64 characters describing
 ;; the characters used for encoding 6-bit values.
 
-(def BASE64_DEFAULT 
+(def ^:const BASE64_DEFAULT 
   "Base64 Alphabet."
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
 
@@ -43,7 +43,7 @@
 (defmacro int->base64-byte
   "Convert 6-bit integer to Base64 byte."
   [i] 
-  `(byte (.charAt BASE64_DEFAULT (int ~i))))
+  `(byte (int (.charAt BASE64_DEFAULT (int ~i)))))
 
 (defmacro base64-byte->int
   "Convert Base64 character to 6-bit integer."
