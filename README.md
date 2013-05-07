@@ -62,6 +62,7 @@ __ID__ is one of:
 - `base64-clj` : evaluate this project
 - `base64-naive` : evaluate a naive and intuitive implementation
 - `apache-commons-base64` : evaluate the Apache Commons Codec
+- `clojure-data-codec` : evaluate `clojure.data.codec.base64`
 
 ## License
 
