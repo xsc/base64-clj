@@ -4,7 +4,7 @@ Convert Data to [Base64](http://en.wikipedia.org/wiki/Base64) and back in a reas
 
 [![Build Status](https://travis-ci.org/xsc/base64-clj.png?branch=master)](https://travis-ci.org/xsc/base64-clj)
 
-This is at least as fast as the [Apache Commons Base64 Codec](http://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/binary/Base64.html) (whose just-as-simple usage you can see [here](https://github.com/xsc/base64-clj/blob/master/benchmark/base64_clj_benchmark/apache_commons_base64.clj)). 
+This is at least as fast as the [Apache Commons Base64 Codec](http://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/binary/Base64.html) (whose just-as-simple usage you can see [here](https://github.com/xsc/base64-clj/blob/master/benchmark/base64_clj_benchmark/apache_commons_base64.clj)), but slower than Alexander Taggart's [data.codec](https://github.com/clojure/data.codec).
 
 ## Usage
 
