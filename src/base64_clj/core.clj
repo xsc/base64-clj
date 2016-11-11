@@ -101,7 +101,7 @@
   ^"[B"
   [^"[B" data]
   (let [len (int (count data))]
-    (when-not (zero? (unchecked-remainder-int len(int 4)))
+    (when-not (zero? (unchecked-remainder-int len (int 4)))
       (throw (IllegalArgumentException. "Expects a byte array whose length is dividable by 4.")))
     (let [cap (let [x (aget data (unchecked-dec-int len))
                     y (aget data (unchecked-subtract-int len (int 2)))
